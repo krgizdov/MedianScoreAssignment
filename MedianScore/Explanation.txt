@@ -1,0 +1,49 @@
+Here I will explain how I handled this task.
+
+We begin by receiveing our input which is done by our GetScoreArray() method.
+-In this method we receive the user input as an array of strings.
+-In order to be sure that the length of the input and the values are acceptable
+ we will use a while loop so that in case of wrong input the user can try again.
+-We use a try{}catch{} block in order to handle incorrect input. 
+-After receiveing the array we check if the length of the array is ok using our check method
+CheckInputArrayLength(string[] stringScoreArray).
+-We then go through each element to make sure the value is ok as well checking with our
+CheckScore(int score) method.
+-After we receive a correct input we then return a new List<int> having parsed each value.
+
+Next we have the logic which gives us our median values which is handled by our GetMedianScores(scoreArray) method.
+-We create a list medianScores where we will keep the medianScores.
+-We create a list tempScores where we will keep scores which are added one by one and ordered after a new score is added.
+-The number of times we will go through the for loop depends on the number of scores we have in our scoresArray.
+
+-We add the i element from scoresArray to the tempScores.
+-After that we order it so that we can get the correct median value.
+-Since we will be using the element which is in the middle of the sequence a couple of times we can store the index in a variable "midIndex"
+-We then check if the count of elements in tempScores is even or odd.
+
+--In case we have an odd number of elements we can directly add the element to the "medianScores" list. We can do this because when we divide the count of tempScores by 2
+we get a value which will always be the midIndex of the array 
+For example:
+[1, 2, 3] , the count is 3 => 3/2 = 1(index) which is 2 in this case
+[1, 2, 3, 4, 5] the count is 5 => 5/2 = 2(index) which in this case would be 3
+
+--In case we have an even number of elements we do something a bit different.
+-We first get the sum of the elements which are in the middle again using the midIndex variable. Here we get the index of the first mid number by doing  
+tempScores.Count / 2 and we get the second by doing tempScores.Count / 2 - 1.
+To understand it better here is an example:
+[5, 10]
+the count is 2 => 2/2 = 1(index) which is 10 in this case(this is our first number)
+                           => 2/2 - 1 = 0(index) which is 5 in this case(this is our second number)
+Then we sum the numbers we get 10+5 = 15, we divide it by 2.0 to get the value as a double
+=> 15 / 2.0 = 7.5, and then we round it up to the nearest integer using the Math.Ceiling method
+which gives us 8
+[1, 2, 3, 4]
+the count is 4 => 4/2 = 2(index) which is 3 in this case(this is our first number)
+                           => 4/2 - 1 = 1(index) which is 2 in this case(this is our second number)
+Then we sum the numbers we get 3+2 = 5, we divide it by 2.0 to get the value as a double
+=> 5 / 2.0 = 2.5, and then we round it up to the nearest integer using the Math.Ceiling method
+which gives us 3
+After we have found all of our medianScore values we return the list medianScores.
+
+Lastly we need to print each of the medianScore values.
+-We do this by using the string.Join() method using a ", " as our seperator.

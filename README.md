@@ -1,1 +1,2 @@
 # MedianScoreAssignment
+Internship assignment
